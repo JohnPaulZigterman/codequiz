@@ -13,7 +13,7 @@
 
     <header class="navhead">
       <h3 id="scoreview">View High Scores</h3>
-      <h3 id="timer">timer</h3>
+      <h3 id="timer"></h3>
     </header>
 
     <main>
@@ -22,10 +22,29 @@
         <h3 id="question">Welcome To The Javascript Quiz</h3>
       </div>
 
-      <div id="list"></div>
+      <div id="list">
+        <ul>
+          <li>
+            <button id="answer1" class="answerbtn">Answer 1</button>
+          </li>
+          <li>
+            <button id="answer2" class="answerbtn">Answer 2</button>
+          </li>
+          <li>
+            <button id="answer3" class="answerbtn">Answer 3</button>
+          </li>
+          <li>
+            <button id="answer4" class="answerbtn">Answer 4</button>
+          </li>
+        </ul>
+      </div>
+
+      <div class="box" id="startzone">
+        <button id="startbutton">Click to start</button>
+      </div>
 
       <div class="box">
-        <button id="startbutton">Click to start</button>
+        <p id="message"></p>
       </div>
 
     </main>

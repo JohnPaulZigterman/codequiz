@@ -2,10 +2,56 @@ var timerEl = document.getElementById("timer");
 var startbutton = document.getElementById("startbutton");
 var question = document.getElementById("question");
 var list = document.getElementById('list');
+var startzone = document.getElementById('startzone');
 
-var qs = 1;
+var message = document.getElementById('message');
 
-var i = 0;
+
+var answer1 = document.getElementById('answer1');
+var answer2 = document.getElementById('answer2');
+var answer3 = document.getElementById('answer3');
+var answer4 = document.getElementById('answer4');
+
+var answerbtns = [document.getElementsByClassName('answerbtn')];
+
+var prompts = [
+    {
+        quest: "Commonly used data types DO NOT include:",
+        answers: [
+            { text: "strings", correct: false},
+            { text: "booleans", correct: false},
+            { text: "alerts", correct: true},
+            { text: "numbers", correct: false},
+        ]
+    },
+    {
+        quest: "The condition of an if/else statement is enclosed within:",
+        answers: [
+            { text: "quotes", correct: false},
+            { text: "curly brackets", correct: false},
+            { text: "parentheses", correct: true},
+            { text: "square brackets", correct: false},
+        ]
+    },
+    {
+        quest: "Arrays in JavaScript can be used to store:",
+        answers: [
+            { text: "numbers and strings", correct: false},
+            { text: "other arrays", correct: false},
+            { text: "booleans", correct: false},
+            { text: "all of the above", correct: true},
+        ]
+    },
+    {
+        quest: "String values must be enclosed within _____ when being assigned to variables:",
+        answers: [
+            { text: "commas", correct: false},
+            { text: "curly brackets", correct: false},
+            { text: "quotes", correct: false},
+            { text: "parentheses", correct: true},
+        ]
+    },
+];
 
 function countdown() {
     var timeLeft = 20;
@@ -22,26 +68,45 @@ function countdown() {
         clearInterval(timeInterval);
       }
     }, 1000);
-  }
+  };
 
-function quiz1() {
+function quiz() {
 
-    list.innerHTML = '<ul><li><button id="answer1">Answer 1</button></li><li><button id="answer2">Answer 2</button></li><li><button id="answer3">Answer 3</button></li><li><button id="answer4">Answer 4</button></li></ul>';
     list.style.visibility = "visible";
     list.classList.add("box");
-    var answer1 = document.getElementById('answer1');
-    var answer2 = document.getElementById('answer2');
-    var answer3 = document.getElementById('answer3');
-    var answer4 = document.getElementById('answer4');
-    question.textContent = "Commonly used data types DO NOT include:";
-    answer1.textContent = "strings";
-    answer2.textContent = "booleans";
-    answer3.textContent = "alerts";
-    answer4.textContent = "numbers";
+    currentQuestionIndex = 0;
+    score = 0;
+    questions();
+};
+
+function questions() {
+    let currentQuestion = prompts[currentQuestionIndex];
+    let questionNo = currentQuestionIndex + 1;
+    question.textContent = questionNo + ". " + currentQuestion.quest;
+    answer1.textContent = currentQuestion.answers[0].text;
+    answer2.textContent = currentQuestion.answers[1].text;
+    answer3.textContent = currentQuestion.answers[2].text;
+    answer4.textContent = currentQuestion.answers[3].text;
+    
+    list.addEventListener('click', (e)=> {
+        let target = e.target;
+        if(target.classList = "answerbtn") {
+            message.textContent = "beef";
+        }
+    })
+
+};
+
+function showCorrect(x) {
+    message.textContent = x;
 }
 
+
+
 startbutton.addEventListener("click", function() {
+    startzone.style.visibility = "hidden";
     countdown();
-    quiz1();
+    quiz();
 });
 
+console.log(answerbtns);

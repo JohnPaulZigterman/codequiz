@@ -11,13 +11,11 @@ header {
     background-color: antiquewhite;
     border-radius: 20px;
     padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
     box-shadow: 5px 5px 5px;
 }
 
-main {
-
-
-}
 
 button {
     font-size: larger;
@@ -28,10 +26,17 @@ button {
     background-color: chocolate;
     border-radius: 10px;
     width: 200px;
+    border: solid black 2px;
+    box-shadow: 2px 2px 2px;
 }
 
 button:hover {
     background-color: darksalmon;
+    transition: 0.5s;
+}
+
+button:not(:hover) {
+    transition: 0.5s;
 }
 
 ul {
@@ -61,4 +66,8 @@ ul li {
 
 #list {
     visibility: hidden;
+}
+
+#startzone {
+    visibility: visible;
 }
