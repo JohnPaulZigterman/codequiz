@@ -1,10 +1,11 @@
 var timerEl = document.getElementById("timer");
 var thebutton = document.getElementById("thebutton");
+var question = document.getElementById("question");
 
 var i = 0;
 
 function countdown() {
-    var timeLeft = 2;
+    var timeLeft = 20;
   
     var timeInterval = setInterval(function () {
       if (timeLeft > 1) {
@@ -20,25 +21,13 @@ function countdown() {
     }, 1000);
   }
 
-document.addEventListener('keydown', function (e) {
-    var keyPress = e.key;
+function quiz() {
+    question.textContent = "Commonly used data types DO NOT include:";
     
-    while (i < answerArray.length){
-        
-        if (keyPress == answerArray[i]) {
-            displayArray[i] = answerArray[i];
-            let displayString = displayArray.join("");
-            guessField.textContent = displayString;
-            i++;
-        } else {
-            return;
-        }
 }
-});
-
-
 
 thebutton.addEventListener("click", function() {
     countdown();
+    quiz();
 });
 

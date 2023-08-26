@@ -1,9 +1,29 @@
 body {
     background-color: slategray;
+    margin: 15px;
 }
 
 header {
     display: flex;
     justify-content: space-between;
-    
+    margin-bottom: 20px;
+}
+
+button {
+    font-size: larger;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-family: monospace;
+    background-color: darksalmon;
+}
+
+.box {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+#question {
+    font-size: x-large;
 }
