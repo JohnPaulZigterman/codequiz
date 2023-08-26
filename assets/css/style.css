@@ -1,12 +1,17 @@
 body {
     background-color: slategray;
     margin: 15px;
+
 }
 
 header {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+    background-color: antiquewhite;
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 5px 5px 5px;
 }
 
 button {
@@ -15,6 +20,10 @@ button {
     text-align: center;
     text-decoration: none;
     font-family: monospace;
+    background-color: chocolate;
+}
+
+button:hover {
     background-color: darksalmon;
 }
 
@@ -22,6 +31,10 @@ button {
     display: flex;
     justify-content: center;
     margin: 20px;
+    padding: 20px;
+    background-color: lightgrey;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px;
 }
 
 #question {
