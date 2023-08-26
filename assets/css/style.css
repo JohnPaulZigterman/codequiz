@@ -14,6 +14,11 @@ header {
     box-shadow: 5px 5px 5px;
 }
 
+main {
+
+
+}
+
 button {
     font-size: larger;
     padding: 10px 20px;
@@ -21,16 +26,29 @@ button {
     text-decoration: none;
     font-family: monospace;
     background-color: chocolate;
+    border-radius: 10px;
+    width: 200px;
 }
 
 button:hover {
     background-color: darksalmon;
 }
 
+ul {
+    display: grid;
+}
+
+ul li {
+    margin: 10px;
+}
+
 .box {
     display: flex;
     justify-content: center;
-    margin: 20px;
+    max-width: 800px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
     padding: 20px;
     background-color: lightgrey;
     border-radius: 20px;
@@ -39,4 +57,8 @@ button:hover {
 
 #question {
     font-size: x-large;
+}
+
+#list {
+    visibility: hidden;
 }
