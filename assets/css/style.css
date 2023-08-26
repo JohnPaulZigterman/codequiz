@@ -1,0 +1,9 @@
+body {
+    background-color: slategray;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    
+}
