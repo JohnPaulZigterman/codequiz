@@ -71,7 +71,6 @@ function countdown() {
   };
 
 function quiz() {
-
     list.style.visibility = "visible";
     list.classList.add("box");
     currentQuestionIndex = 0;
@@ -80,6 +79,7 @@ function quiz() {
 };
 
 function questions() {
+    
     let currentQuestion = prompts[currentQuestionIndex];
     let questionNo = currentQuestionIndex + 1;
     question.textContent = questionNo + ". " + currentQuestion.quest;
@@ -87,20 +87,51 @@ function questions() {
     answer2.textContent = currentQuestion.answers[1].text;
     answer3.textContent = currentQuestion.answers[2].text;
     answer4.textContent = currentQuestion.answers[3].text;
-    
-    list.addEventListener('click', (e)=> {
-        let target = e.target;
-        if(target.classList = "answerbtn") {
-            message.textContent = "beef";
+    answer1.addEventListener('click', function() {
+
+        if (currentQuestion.answers[0].correct == true) {
+            message.textContent = "You Got It!";
+        } else {
+            message.textContent = "Not Quite!";
         }
-    })
+        currentQuestionIndex++;
+        questions();
+        return;
+    }, {once: true});
 
+    answer2.addEventListener('click', function() {
+        if (currentQuestion.answers[1].correct == true) {
+            message.textContent = "You Got It!";
+        } else {
+            message.textContent = "Not Quite!";
+        }
+        currentQuestionIndex++;
+        questions();
+        return;
+    }, {once: true});
+
+    answer3.addEventListener('click', function() {
+        if (currentQuestion.answers[2].correct == true) {
+            message.textContent = "You Got It!";
+        } else {
+            message.textContent = "Not Quite!";
+        }
+        currentQuestionIndex++;
+        questions();
+        return;
+    }, {once: true});
+
+    answer4.addEventListener('click', function() {
+        if (currentQuestion.answers[3].correct == true) {
+            message.textContent = "You Got It!";
+        } else {
+            message.textContent = "Not Quite!";
+        }
+        currentQuestionIndex++;
+        questions();
+        return;
+    }, {once: true});
 };
-
-function showCorrect(x) {
-    message.textContent = x;
-}
-
 
 
 startbutton.addEventListener("click", function() {
@@ -108,5 +139,3 @@ startbutton.addEventListener("click", function() {
     countdown();
     quiz();
 });
-
-console.log(answerbtns);
