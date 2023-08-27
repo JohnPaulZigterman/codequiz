@@ -3,8 +3,14 @@ var startbutton = document.getElementById("startbutton");
 var question = document.getElementById("question");
 var list = document.getElementById('list');
 var startzone = document.getElementById('startzone');
+var unordered = document.getElementById('unordered');
 
 var message = document.getElementById('message');
+
+let answerbtns = document.querySelectorAll('.answerbtn');
+
+var currentQuestionIndex = 0;
+var score = 0;
 
 
 var answer1 = document.getElementById('answer1');
@@ -12,7 +18,7 @@ var answer2 = document.getElementById('answer2');
 var answer3 = document.getElementById('answer3');
 var answer4 = document.getElementById('answer4');
 
-var answerbtns = [document.getElementsByClassName('answerbtn')];
+var score = 0;
 
 var prompts = [
     {
@@ -25,7 +31,7 @@ var prompts = [
         ]
     },
     {
-        quest: "The condition of an if/else statement is enclosed within:",
+        quest: "The condition in an if/else statement is enclosed within:",
         answers: [
             { text: "quotes", correct: false},
             { text: "curly brackets", correct: false},
@@ -51,10 +57,19 @@ var prompts = [
             { text: "parentheses", correct: true},
         ]
     },
+    {
+        quest: "A very useful tool used during development and debugging for printing content to the debugger is:",
+        answers: [
+            { text: "Javascript", correct: false},
+            { text: "terminal/bash", correct: false},
+            { text: "for loops", correct: false},
+            { text: "console.log", correct: true},
+        ]
+    },
 ];
 
 function countdown() {
-    var timeLeft = 20;
+    var timeLeft = 60;
   
     var timeInterval = setInterval(function () {
       if (timeLeft > 1) {
@@ -64,8 +79,8 @@ function countdown() {
         timerEl.textContent = timeLeft + ' second remaining';
         timeLeft--;
       } else {
-        timerEl.textContent = 'Done';
-        clearInterval(timeInterval);
+        scoreSheet();
+        return;
       }
     }, 1000);
   };
@@ -73,13 +88,35 @@ function countdown() {
 function quiz() {
     list.style.visibility = "visible";
     list.classList.add("box");
-    currentQuestionIndex = 0;
-    score = 0;
     questions();
 };
 
+function scoreSheet() {
+    list.removeChild(unordered);
+    message.textContent = "Your Score Is: " + score;
+}
+
+function clickEvent() {
+
+    var currentQuestion = prompts[currentQuestionIndex];
+    if (this.textContent == currentQuestion.answers[0].text && currentQuestion.answers[0].correct == true) {
+        message.textContent = "Nailed It!";
+    } else if (this.textContent == currentQuestion.answers[1].text && currentQuestion.answers[1].correct == true) {
+        message.textContent = "Nailed It!";
+    } else if (this.textContent == currentQuestion.answers[2].text && currentQuestion.answers[2].correct == true) {
+        message.textContent = "Nailed It!";
+    } else if (this.textContent == currentQuestion.answers[3].text && currentQuestion.answers[3].correct == true) {
+        message.textContent = "Nailed It!";
+    } else {
+        message.textContent = "Not Quite!";
+    }
+    currentQuestionIndex++;
+    questions();
+
+}
+
 function questions() {
-    
+
     let currentQuestion = prompts[currentQuestionIndex];
     let questionNo = currentQuestionIndex + 1;
     question.textContent = questionNo + ". " + currentQuestion.quest;
@@ -87,55 +124,17 @@ function questions() {
     answer2.textContent = currentQuestion.answers[1].text;
     answer3.textContent = currentQuestion.answers[2].text;
     answer4.textContent = currentQuestion.answers[3].text;
-    answer1.addEventListener('click', function() {
 
-        if (currentQuestion.answers[0].correct == true) {
-            message.textContent = "You Got It!";
-        } else {
-            message.textContent = "Not Quite!";
-        }
-        currentQuestionIndex++;
-        questions();
-        return;
-    }, {once: true});
 
-    answer2.addEventListener('click', function() {
-        if (currentQuestion.answers[1].correct == true) {
-            message.textContent = "You Got It!";
-        } else {
-            message.textContent = "Not Quite!";
-        }
-        currentQuestionIndex++;
-        questions();
-        return;
-    }, {once: true});
+    answerbtns.forEach((item) => {
+        item.addEventListener('click', clickEvent);
+    });
 
-    answer3.addEventListener('click', function() {
-        if (currentQuestion.answers[2].correct == true) {
-            message.textContent = "You Got It!";
-        } else {
-            message.textContent = "Not Quite!";
-        }
-        currentQuestionIndex++;
-        questions();
-        return;
-    }, {once: true});
-
-    answer4.addEventListener('click', function() {
-        if (currentQuestion.answers[3].correct == true) {
-            message.textContent = "You Got It!";
-        } else {
-            message.textContent = "Not Quite!";
-        }
-        currentQuestionIndex++;
-        questions();
-        return;
-    }, {once: true});
 };
 
 
 startbutton.addEventListener("click", function() {
-    startzone.style.visibility = "hidden";
+    startzone.removeChild(startbutton);
     countdown();
     quiz();
 });
