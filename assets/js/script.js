@@ -95,6 +95,7 @@ function quiz() {
 };
 
 function logStats() {
+    inputname = document.getElementById('init').value;
     localStorage.setItem("Id", inputname);
     localStorage.setItem("Score", score);
 }
@@ -108,10 +109,9 @@ function displayStats() {
 function scoreSheet() {
     question.textContent = "Test Complete!";
     list.textContent = "You got " + score + " correct!";
-    startzone.innerHTML = '<form id="form1"> Initials: <input type="text" name="init"> <br> <input type="button" value="Submit" id="submitbutton"> </form>';
+    startzone.innerHTML = '<form id="form1"> Initials: <input type="text" id="init"> <br> <input type="button" value="Submit" id="submitbutton"> </form>';
     var submitbutton = document.getElementById('submitbutton');
     submitbutton.addEventListener('click', function() {
-        inputname = document.querySelector('init');
         logStats();
         displayStats();
     });
