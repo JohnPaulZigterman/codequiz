@@ -13,6 +13,7 @@ let answerbtns = document.querySelectorAll('.answerbtn');
 var currentQuestionIndex = 0;
 var score = 0;
 var timeLeft = 30;
+var inputname;
 
 
 var answer1 = document.getElementById('answer1');
@@ -93,10 +94,27 @@ function quiz() {
     questions();
 };
 
+function logStats() {
+    localStorage.setItem("Id", inputname);
+    localStorage.setItem("Score", score);
+}
+
+function displayStats() {
+    var nameread = localStorage.getItem("Id");
+    var scoreread = localStorage.getItem("Score");
+    list.textContent = "Name: " + nameread + " & Score: " + scoreread;
+}
+
 function scoreSheet() {
     question.textContent = "Test Complete!";
     list.textContent = "You got " + score + " correct!";
-    startzone.innerHTML = '<form id="form1"> Initials: <input type="text" name="init"> <br> <input type="button" value="Submit" onclick="submitInit()"> </form>';
+    startzone.innerHTML = '<form id="form1"> Initials: <input type="text" name="init"> <br> <input type="button" value="Submit" id="submitbutton"> </form>';
+    var submitbutton = document.getElementById('submitbutton');
+    submitbutton.addEventListener('click', function() {
+        inputname = document.querySelector('init');
+        logStats();
+        displayStats();
+    });
 }
 
 function clickEvent() {
