@@ -6,11 +6,13 @@ var startzone = document.getElementById('startzone');
 var unordered = document.getElementById('unordered');
 
 var message = document.getElementById('message');
+var message2 = document.getElementById('message2');
 
 let answerbtns = document.querySelectorAll('.answerbtn');
 
 var currentQuestionIndex = 0;
 var score = 0;
+var timeLeft = 30;
 
 
 var answer1 = document.getElementById('answer1');
@@ -69,7 +71,6 @@ var prompts = [
 ];
 
 function countdown() {
-    var timeLeft = 60;
   
     var timeInterval = setInterval(function () {
       if (timeLeft > 1) {
@@ -79,6 +80,7 @@ function countdown() {
         timerEl.textContent = timeLeft + ' second remaining';
         timeLeft--;
       } else {
+        timerEl.textContent = '0 seconds remaining';
         scoreSheet();
         return;
       }
@@ -92,24 +94,38 @@ function quiz() {
 };
 
 function scoreSheet() {
-    list.removeChild(unordered);
-    message.textContent = "Your Score Is: " + score;
+    question.textContent = "Test Complete!";
+    list.textContent = "You got " + score + " correct!";
+    startzone.innerHTML = '<form id="form1"> Initials: <input type="text" name="init"> <br> <input type="button" value="Submit" onclick="submitInit()"> </form>';
 }
 
 function clickEvent() {
 
+    var currentQuestionPlus = currentQuestionIndex + 1;
+
     var currentQuestion = prompts[currentQuestionIndex];
     if (this.textContent == currentQuestion.answers[0].text && currentQuestion.answers[0].correct == true) {
         message.textContent = "Nailed It!";
+        score++;
     } else if (this.textContent == currentQuestion.answers[1].text && currentQuestion.answers[1].correct == true) {
         message.textContent = "Nailed It!";
+        score++;
     } else if (this.textContent == currentQuestion.answers[2].text && currentQuestion.answers[2].correct == true) {
         message.textContent = "Nailed It!";
+        score++;
     } else if (this.textContent == currentQuestion.answers[3].text && currentQuestion.answers[3].correct == true) {
         message.textContent = "Nailed It!";
+        score++;
     } else {
         message.textContent = "Not Quite!";
+        timeLeft -= 5;
     }
+
+    if (currentQuestionPlus == prompts.length) {
+        scoreSheet();
+        return;
+    }
+
     currentQuestionIndex++;
     questions();
 
