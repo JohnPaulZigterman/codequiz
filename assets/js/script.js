@@ -4,6 +4,7 @@ var question = document.getElementById("question");
 var list = document.getElementById('list');
 var startzone = document.getElementById('startzone');
 var unordered = document.getElementById('unordered');
+var scoreview = document.getElementById('scoreview');
 
 var message = document.getElementById('message');
 var message2 = document.getElementById('message2');
@@ -80,9 +81,12 @@ function countdown() {
       } else if (timeLeft === 1) {
         timerEl.textContent = timeLeft + ' second remaining';
         timeLeft--;
-      } else {
+      } else if (timeLeft === 0) {
         timerEl.textContent = '0 seconds remaining';
         scoreSheet();
+        return;
+      } else if (timeLeft < 0) {
+        timerEl.textContent = '0 seconds remaining';
         return;
       }
     }, 1000);
@@ -96,17 +100,28 @@ function quiz() {
 
 function logStats() {
     inputname = document.getElementById('init').value;
-    localStorage.setItem("Id", inputname);
-    localStorage.setItem("Score", score);
+    var player = [inputname, score];
+    var highscorelist = [];
+    if (localStorage.getItem('highscorelist') === null) {
+        highscorelist.push(player);
+        var highscorestring = JSON.stringify(highscorelist);
+        localStorage.setItem('highscorelist', highscorestring);
+    } else {
+        highscorelist = JSON.parse(localStorage.getItem('highscorelist'));
+        highscorelist.push(player);
+        var highscorestring = JSON.stringify(highscorelist);
+        localStorage.setItem('highscorelist', highscorestring);
+    }
 }
 
 function displayStats() {
-    var nameread = localStorage.getItem("Id");
-    var scoreread = localStorage.getItem("Score");
-    list.textContent = "Name: " + nameread + " & Score: " + scoreread;
+    var displaystring = localStorage.getItem('highscorelist');
+    var displaylist = JSON.parse(displaystring);
+    list.textContent = displaylist;
 }
 
 function scoreSheet() {
+    timeLeft = -1;
     question.textContent = "Test Complete!";
     list.textContent = "You got " + score + " correct!";
     startzone.innerHTML = '<form id="form1"> Initials: <input type="text" id="init"> <br> <input type="button" value="Submit" id="submitbutton"> </form>';
@@ -172,3 +187,9 @@ startbutton.addEventListener("click", function() {
     countdown();
     quiz();
 });
+
+scoreview.addEventListener("click", function() {
+    list.style.visibility = "visible";
+    list.classList.add("box");
+    displayStats();
+})
