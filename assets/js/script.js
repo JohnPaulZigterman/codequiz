@@ -117,7 +117,8 @@ function logStats() {
 function displayStats() {
     var displaystring = localStorage.getItem('highscorelist');
     var displaylist = JSON.parse(displaystring);
-    list.textContent = displaylist;
+    list.innerHTML = '<h2>High Scores</h2><h3>' + displaylist + '</h3>';
+    
 }
 
 function scoreSheet() {
@@ -182,7 +183,8 @@ function questions() {
 };
 
 
-startbutton.addEventListener("click", function() {
+startbutton.addEventListener("click", function(e) {
+    e.stopPropagation();
     startzone.removeChild(startbutton);
     countdown();
     quiz();
