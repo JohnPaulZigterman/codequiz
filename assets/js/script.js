@@ -1,3 +1,4 @@
+//grabbing html elements and establishing other variables
 var timerEl = document.getElementById("timer");
 var startbutton = document.getElementById("startbutton");
 var question = document.getElementById("question");
@@ -24,6 +25,7 @@ var answer4 = document.getElementById('answer4');
 
 var score = 0;
 
+//stores the questions and answers in arrays
 var prompts = [
     {
         quest: "Commonly used data types DO NOT include:",
@@ -72,6 +74,7 @@ var prompts = [
     },
 ];
 
+//starts countdown
 function countdown() {
   
     var timeInterval = setInterval(function () {
@@ -92,12 +95,14 @@ function countdown() {
     }, 1000);
   };
 
+//begins quiz
 function quiz() {
     list.style.visibility = "visible";
     list.classList.add("box");
     questions();
 };
 
+//takes player info and stores it to local storage
 function logStats() {
     inputname = document.getElementById('init').value;
     var player = [inputname, score];
@@ -114,6 +119,7 @@ function logStats() {
     }
 }
 
+// displays high score list
 function displayStats() {
     var displaystring = localStorage.getItem('highscorelist');
     var displaylist = JSON.parse(displaystring);
@@ -121,6 +127,7 @@ function displayStats() {
     
 }
 
+//displays score sheet for that test attempt
 function scoreSheet() {
     timeLeft = -1;
     question.textContent = "Test Complete!";
@@ -133,6 +140,7 @@ function scoreSheet() {
     });
 }
 
+//checks for accuracy of answer, displays message, and increments score
 function clickEvent() {
 
     var currentQuestionPlus = currentQuestionIndex + 1;
@@ -165,6 +173,7 @@ function clickEvent() {
 
 }
 
+//fills in question and answer fields with appropriate data
 function questions() {
 
     let currentQuestion = prompts[currentQuestionIndex];
@@ -175,14 +184,14 @@ function questions() {
     answer3.textContent = currentQuestion.answers[2].text;
     answer4.textContent = currentQuestion.answers[3].text;
 
-
+    //event listener for answer buttons
     answerbtns.forEach((item) => {
         item.addEventListener('click', clickEvent);
     });
 
 };
 
-
+//adds event listener to start button
 startbutton.addEventListener("click", function(e) {
     e.stopPropagation();
     startzone.removeChild(startbutton);
@@ -190,6 +199,8 @@ startbutton.addEventListener("click", function(e) {
     quiz();
 });
 
+
+//adds event listener to view scores
 scoreview.addEventListener("click", function() {
     list.style.visibility = "visible";
     list.classList.add("box");
